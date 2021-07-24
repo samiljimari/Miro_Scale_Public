@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://miro.com/app/static/styles.1.0.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <style>
+
+      * {
+        user-select:none;
+      }
+      .miro-input--small, .miro-btn, button,  .ng-hide, .miro-btn--pull-right {
+          width: 80px;
+          padding: 3px;
+      }
+
+      .miro-h4, .no-selected-widget {
+          margin: 3px 0 0 0px ;
+      }
+
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+
+      .h_style {
+        padding: 20;
+        margin: 20px;
+      }
+
+      .miro-btn--medium {
+        height: 36px;
+        width: 75px;
+      }
+
+      hr.greyLine {
+        border-top: 1px solid #C3C2CF;
+        opacity: 1;
+        margin: 5px;
+        padding: 0;
+        margin-bottom: 0px;
+      }
+
+      .edge {
+        margin-left: 20px;
+      }
+
+      .red {
+        background-color: rgb(230, 47, 47);
+        color: white;
+        border-color: rgb(230, 47, 47);
+      }
+
+      .red:hover {
+        background-color: tomato !important;
+        border-color: tomato !important;
+      }
+
+      .miscbtns {
+        width: 280px !important; 
+        font-size: 16px !important;
+      }
+
+      .status {
+        margin-top: 5px !important;
+        margin-bottom: 5px !important;
+        text-align: center;
+        font-size: 16px !important;
+      }
+
+      .reference {
+        margin-top: 5px !important;
+        margin-bottom: 5px !important;
+        margin-left: 30px !important;
+        margin-right: 30px !important;
+      }
+
+      .margins {
+        margin-left: 30px;
+      }
+
+      .margin+ {
+        margin-left: 50px;
+      }
+
+      .pstyle {
+        display: inline-block;
+      }
+
+      .pstyle2 {
+        margin-left: 30px;
+      }
+
+      .defaultright {
+        margin-right: 27px;
+      }
+
+      .widthextra {
+        margin-right: 3.5px;
+      }
+
+      .subheadersize {
+        font-size: 14px;
+      }
+
+      .dropdownstyle {
+        height: 40px !important;
+        padding: 0 15px 0 15px !important;
+        font-size: 14px !important;
+        border-radius: 4px !important;
+        width: 125px !important;
+      }
+
+      .dropdownstyle2 {
+        height: 40px !important;
+        padding: 0 15px 0 15px !important;
+        font-size: 14px !important;
+        border-radius: 4px !important;
+        width: 90px !important;
+      }
+
+      .status-green {
+        color: green;
+      }
+
+      .status-red {
+        color: red;
+      }
+
+      .extra-width {
+        width: 95px !important;
+        height: 45px !important;
+      }
+
+      .extra-margin {
+        margin-bottom: 10px !important;
+      }
+
+      .calibrate-width {
+        width: 75px !important;
+      }
+
+      .tooltip-line, .tooltip-text {
+        visibility: hidden !important;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 2px 0;
+        font-size: 12px;
+
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+      }
+
+      #text-i:hover ~ .tooltip-text {
+        visibility: visible !important;
+      }
+
+      #line-i:hover ~ .tooltip-line {
+        visibility: visible !important;
+      }
+
+      .resize-btns {
+        width: 25px !important;
+        height: 20px;
+        min-width: 20px;
+        display: inline-block;
+        padding: 1px;
+        margin: 1px;
+      }
+
+      .plus-minus {
+        display: inline-block;
+      }
+
+      .pstyle3 {
+        text-align: center;
+        margin-bottom: 10px;
+        margin-top: 10px;
+      }
+
+      .div-style {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        
+      }
+
+      .pstyle4 {
+        margin-bottom: 0px !important;
+        margin-top: 0px !important;
+        
+        overflow: hidden;
+      }
+
+      .checkbox-spacing {
+        margin-left: 30px;
+        margin-top: 5px;
+        display: inline-block;
+      }
+
+      .check-box {
+        vertical-align: middle;
+      }
+
+      .re-log {
+        width: 110px !important;
+        height: 30px;
+        display: inline-block;
+        margin-left: 30px;
+      }
+
+      .reset {
+        width: 110px !important;
+        height: 30px;
+        display: inline-block;
+        background-color: rgb(6, 156, 6) !important;
+        border-color: rgb(6, 156, 6) !important;
+        z-index: 2;
+        float: right;
+        margin-top: 28px;
+        margin-right: 5px;
+      }
+
+      .reset:hover {
+        background-color: green !important;
+        border-color: green !important;
+      }
+
+      .technical {
+        bottom: 0;
+        margin-top: 650px !important;
+        margin: 10px;
+        text-align: center;
+        user-select: text !important;
+        font-size: 16px !important;
+      }
+
+      .email-copy{
+        cursor: pointer;
+      }
+
+      .email-copy:hover{
+        cursor: pointer !important;
+        color: #160c7c;
+      }
+
+  </style>
+</head>
+
+<body>
+
+<div class="miro-h2 h_style">Size and Scale</div>
+
+<section>
+  <div class="miro-p-medium status">
+    <p id="status_message">Status message here</p>
+  </div>
+  <button id="reference" class="miro-btn miro-btn--primary miro-btn--medium miscbtns reference extra-margin" disabled>Go to reference widget</button>
+</section>
+
+<section class="no-selected-widget">
+  <div class="miro-p-medium status">
+    Please select one widget to read size
+  </div>
+
+  <div class="miro-p-medium technical">
+    For technical support and bug report please contact: <br> <p id="email_click" class="email-copy">samiyazuu@gmail.com</p>
+  </div>
+</section>
+
+<section class="widget-info">
+  <div class="miro-p-medium">
+    <p class="miro-p-medium margins pstyle defaultright">Deafult unit:&nbsp;</p> 
+    <input class="miro-input miro-input--primary miro-input--small margin+" id="default_unit" autocomplete="off" onkeyup="fill_default()">
+    <br>
+    <p class="miro-p-medium margins pstyle">Reference for X:&nbsp;</p>
+    <input class="miro-input miro-input--primary miro-input--small margin+" id="input_x2" autocomplete="off"></input>
+    <button id="setscale" class="miro-btn miro-btn--secondary miro-btn--small">set X</button>
+    <br>
+    <p class="miro-p-medium margins pstyle">Reference for Y:&nbsp;</p>
+    <input class="miro-input miro-input--primary miro-input--small margin+" id="input_y2" autocomplete="off"></input>
+    <button id="setscaley" class="miro-btn miro-btn--secondary miro-btn--small">set Y</button>
+  </div>
+  <div class="miro-p-medium">
+    <button id="unset_scale" class="miro-btn miro-btn--secondary miro-btn--small red miscbtns reference" disabled>Unset scale</button>
+    <hr class="greyLine">
+    <div class="miro-h2 status subheadersize">
+      Current widget size
+    </div>
+    <p class="pstyle pstyle2 calibrate-width">Increment:&nbsp;</p> 
+    <select class="miro-select--small dropdownstyle2" id="increment">
+      <option value="1" selected>1</option>
+      <option value="10">10</option>
+      <option value="100">100</option>
+      <option value="1000">1000</option>
+    </select>
+    <div class="checkbox-spacing">
+      <label class="miro-checkbox">
+        <input class="check-box" type="checkbox" name="aspect_ratio" id="aspect_ratio">
+        <span>Keep aspect ratio </span>
+      </label>
+    </div>
+    <button class="miro-btn miro-btn--primary re-log" id="relog">Re-log values</button>
+    <div class="div-style">
+      <p class="pstyle pstyle2 pstyle4 widthextra">Width: &nbsp;</p> <input class="miro-input miro-input--primary miro-input--small margin+ extra-width" id="input_x" autocomplete="off">
+      <div class="plus-minus">
+        <button id="plus-w" class="miro-btn miro-btn--primary miro-btn--small resize-btns" data-target="input_x">+</button>
+        <br>
+        <button id="minus-w" class="miro-btn miro-btn--primary miro-btn--small resize-btns" data-target="input_x">-</button>
+      </div>
+      <input class="miro-input miro-input--primary miro-input--small extra-width" type="text" id="input_x_unit" placeholder="X units" autocomplete="off"></input>
+    </div>
+    
+    <div class="div-style">
+      <p class="pstyle pstyle2 pstyle4">Height: &nbsp;</p> <input class="miro-input miro-input--primary miro-input--small margin+ extra-width" id="input_y" autocomplete="off">
+      <div class="plus-minus">
+        <button id="plus-h" class="miro-btn miro-btn--primary miro-btn--small resize-btns" data-target="input_y">+</button>
+        <br>
+        <button id="minus-h" class="miro-btn miro-btn--primary miro-btn--small resize-btns" data-target="input_y">-</button>
+      </div>
+      <input class="miro-input miro-input--primary miro-input--small extra-width" type="text" id="input_y_unit" placeholder="Y units" autocomplete="off"></input>
+    </div>
+
+    <button id="resizebutton" class="miro-btn miro-btn--primary miro-btn--medium miscbtns reference">Resize</button>
+
+    <hr class="greyLine">
+
+    <div class="miro-h2 status subheadersize">
+      Dimensions and annotation
+    </div>
+    <p class="pstyle pstyle2 calibrate-width">Text size:&nbsp;</p> <input class="miro-input miro-input--primary miro-input--small" id="txt_size_input"> 
+    <img id="text-i" style="padding-bottom: 5px; padding-top: 5px;" src="img/info-icon.png" height="15px" width="21px" alt="">
+    <span class="tooltip-text">Minimum value: 0.7 <br> Maximum value: 800</span>
+    <button id="reset" class="miro-btn miro-btn--primary reset">Reset</button>
+    <br>
+    <p class="pstyle pstyle2">Line width: &nbsp;</p> <input class="miro-input miro-input--primary miro-input--small" id="line_width_input">
+    <img id="line-i" style="padding-bottom: 5px; padding-top: 5px;" src="img/info-icon.png" height="15px" width="21px" alt="">
+    <span class="tooltip-line">Minimum value: 1 <br> Maximum value: 55</span>
+    <br>
+    <p class="pstyle pstyle2 calibrate-width">Line color:&nbsp;</p> 
+    <select class="miro-select--small dropdownstyle" id="line_color">
+      <option value="1" selected>Black</option>
+      <option value="2">White</option>
+      <option value="3">Yellow</option>
+      <option value="4">Orange</option>
+      <option value="5">Red</option>
+      <option value="6">Grey</option>
+      <option value="7">Lime</option>
+      <option value="8">Green</option>
+      <option value="9">Burgundy</option>
+      <option value="10">Cyan</option>
+      <option value="11">Pale-Green</option>
+      <option value="12">Purple</option>
+      <option value="13">Light-Blue</option>
+      <option value="14">Blue</option>
+      <option value="15">Dark-Blue</option>
+    </select>
+    <br>
+    <p class="pstyle pstyle2 calibrate-width">Line type:&nbsp;</p> 
+    <select class="miro-select--small dropdownstyle" id="line_type">
+      <option value="1" selected>Full</option>
+      <option value="2">Dashed</option>
+      <option value="3">Dotted</option>
+    </select>
+    <button id="createdimensionline" class="miro-btn miro-btn--primary miro-btn--medium miscbtns reference" style="margin: 3px 0 0 18px " >Sketch Dimensions</button>
+  </div>
+</section>
+<script src="https://miro.com/app/static/sdk.1.1.js"></script>
+<script>
+//HTML and non-miro functions
+async function fill_default() {
+  //fill the value of deafult unit onkeyup() to dimension inputs
+  let unit_x = document.getElementById("default_unit").value;
+  let unit1 = document.getElementById("input_x_unit");
+  let unit2 = document.getElementById("input_y_unit");
+
+  unit1.value = unit_x;
+  unit2.value = unit_x;
+}
+
+//-------------------- Input filters ----------------------------------------------------//
+
+setInputFilter(document.getElementById("txt_size_input"), function(value) {
+  return /^-?\d*[.]?\d*$/.test(value); 
+});
+
+setInputFilter(document.getElementById("line_width_input"), function(value) {
+  return /^-?\d*[.]?\d*$/.test(value); 
+});
+
+setInputFilter(document.getElementById("input_x"), function(value) {
+  return /^-?\d*[.]?\d*$/.test(value); 
+});
+
+setInputFilter(document.getElementById("input_y"), function(value) {
+  return /^-?\d*[.]?\d*$/.test(value); 
+});
+
+setInputFilter(document.getElementById("input_x2"), function(value) {
+  return /^-?\d*[.]?\d*$/.test(value); 
+});
+
+setInputFilter(document.getElementById("input_y2"), function(value) {
+  return /^-?\d*[.]?\d*$/.test(value); 
+});
+
+function setInputFilter(textbox, inputFilter) {
+  ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+    textbox.addEventListener(event, function() {
+      if (inputFilter(this.value)) {
+        this.oldValue = this.value;
+        this.oldSelectionStart = this.selectionStart;
+        this.oldSelectionEnd = this.selectionEnd;
+      } else if (this.hasOwnProperty("oldValue")) {
+        this.value = this.oldValue;
+        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+      } else {
+        this.value = "";
+      }
+    });
+  });
+}
+
+// --------------------------------------------------------------------------------------------------//
+
+
+
+//-------------------------------- keydown increments ----------------------------------------------//
+
+let input_x = document.querySelector('#input_x2')
+let input_y = document.querySelector('#input_y2')
+let input_x2 = document.querySelector('#input_x')
+let input_y2 = document.querySelector('#input_y')
+
+let timeout, interval;
+
+function incrementValue(id) {
+  let el = document.getElementById(id);
+  let value = parseFloat(el.value);
+  let increment = parseFloat(document.getElementById('increment').value);
+  let id2 = "#" + id;
+  if (isNaN(document.querySelector(id2).value) == true || parseFloat(document.querySelector(id2).value) == "" || parseFloat(document.querySelector(id2).value) == 0) {
+    let new_w_value = increment;
+    document.querySelector(id2).value = new_w_value;
+    return;
+  }
+  else {
+    document.getElementById(id).value = value + increment;
+  }
+}
+
+function decrementValue(id) {
+  let el = document.getElementById(id);
+  let value = parseFloat(el.value);
+  let decrement = parseFloat(document.getElementById('increment').value);
+  let id2 = "#" + id;
+  if(isNaN(document.querySelector(id2).value) == true || parseFloat(document.querySelector(id2).value) == "" || parseFloat(document.querySelector(id2).value) == 0 
+  || parseFloat(document.querySelector(id2).value) < 0 || parseFloat(document.querySelector(id2).value) - decrement < 0) {
+    miro.showNotification("Negative or incompatible values are not accepted!");
+    return;
+  }
+  else {
+    document.getElementById(id).value = value - decrement;
+  }
+}
+
+[].forEach.call(document.querySelectorAll('#plus-w'), function(button) {
+  button.addEventListener('mousedown', function() {
+    //console.log("mousedown + W")
+    if (isNaN(input_x2.value) == true || parseFloat(input_x2.value) == "" || parseFloat(input_x2.value) == 0) {
+      let new_w_value = 1;
+      document.querySelector('#input_x').value = new_w_value;
+      return;
+    }
+    let id = button.dataset.target;
+    incrementValue(id);
+    
+    timeout = setTimeout(function() {
+      interval = setInterval(function() {
+        incrementValue(id);
+      }, 50);    
+    }, 300);
+  });
+  
+  button.addEventListener('mouseup', clearTimers);
+  button.addEventListener('mouseleave', clearTimers); 
+  
+  function clearTimers() {
+    clearTimeout(timeout);
+    clearInterval(interval);
+  }
+});
+
+[].forEach.call(document.querySelectorAll('#plus-h'), function(button) {
+  button.addEventListener('mousedown', function() {
+    //console.log("mousedown + H")
+    if (isNaN(input_y2.value) == true || parseFloat(input_y2.value) == "" || parseFloat(input_y2.value) == 0) {
+      let new_w_value = 1;
+      document.querySelector('#input_y').value = new_w_value;
+      return;
+    }
+    let id = button.dataset.target;
+    incrementValue(id);
+    
+    timeout = setTimeout(function() {
+      interval = setInterval(function() {
+        incrementValue(id);
+      }, 50);    
+    }, 300);
+  });
+  
+  button.addEventListener('mouseup', clearTimers);
+  button.addEventListener('mouseleave', clearTimers); 
+  
+  function clearTimers() {
+    clearTimeout(timeout);
+    clearInterval(interval);
+  }
+});
+
+[].forEach.call(document.querySelectorAll('#minus-w'), function(button) {
+  button.addEventListener('mousedown', function() {
+    //console.log("mousedown - W")
+    if(isNaN(input_x2.value) == true || parseFloat(input_x2.value) == "" || parseFloat(input_x2.value) == 0 || parseFloat(input_x2.value) < 0) {
+      miro.showNotification("Negative or incompatible values are not accepted!");
+      return;
+    }
+    let id = button.dataset.target;
+    decrementValue(id);
+    
+    timeout = setTimeout(function() {
+      interval = setInterval(function() {
+        decrementValue(id);
+      }, 50);    
+    }, 300);
+  });
+  
+  button.addEventListener('mouseup', clearTimers);
+  button.addEventListener('mouseleave', clearTimers); 
+  
+  function clearTimers() {
+    clearTimeout(timeout);
+    clearInterval(interval);
+  }
+});
+
+[].forEach.call(document.querySelectorAll('#minus-h'), function(button) {
+  button.addEventListener('mousedown', function() {
+    //console.log("mousedown - H")
+
+    if(isNaN(input_y2.value) == true || parseFloat(input_y2.value) == "" || parseFloat(input_y2.value) == 0 || parseFloat(input_y2.value) < 0) {
+      miro.showNotification("Negative or incompatible values are not accepted!");
+      return;
+    }
+    let id = button.dataset.target;
+    decrementValue(id);
+    
+    timeout = setTimeout(function() {
+      interval = setInterval(function() {
+        decrementValue(id);
+      }, 50);    
+    }, 300);
+  });
+  
+  button.addEventListener('mouseup', clearTimers);
+  button.addEventListener('mouseleave', clearTimers); 
+  
+  function clearTimers() {
+    clearTimeout(timeout);
+    clearInterval(interval);
+  }
+});
+
+//--------------------------------------------------------------------------------------------------//
+
+miro.onReady(async () => {
+
+  let lastSelectedWidgetId
+  let lastSelectedWidget
+  let selectedWidget
+  let current_scale_widget = 0;
+  let widgetInfo = document.querySelector('.widget-info')
+  let input_x = document.querySelector('#input_x2')
+  let input_y = document.querySelector('#input_y2')
+  let input_x2 = document.querySelector('#input_x')
+  let input_y2 = document.querySelector('#input_y')
+  let input_x_unit = document.querySelector('#input_x_unit')
+  let input_y_unit = document.querySelector('#input_y_unit')
+  let default_unit = document.querySelector('#default_unit')
+  default_unit.value = "mm";
+  let placeholder = document.querySelector('.no-selected-widget')
+  let currentDimensionGroup = [] // as new text nodes get created, current dimension group will denote all widgets that should be present in this group
+  let currentDimensionGroupData = []
+  let dimensionCreatorState = false
+
+  await getScale();
+  await init_values()
+
+  let setScaleButton = document.querySelector('#setscale')
+  setScaleButton.addEventListener('click', async () => {
+    btSetScale()
+  })
+
+  let setScaleButtonY = document.querySelector('#setscaley')
+  setScaleButtonY.addEventListener('click', async () => {
+    btSetScaleY()
+  })
+
+  let createDimensionLine = document.querySelector('#createdimensionline')
+  createDimensionLine.addEventListener('click', async () => {
+    CreateDimensionLine()
+  })
+
+  let unset_scale = document.querySelector('#unset_scale')
+  unset_scale.addEventListener('click', async () => {
+    unset()
+  })
+
+  let reference = document.querySelector('#reference')
+  reference.addEventListener('click', async () => {
+    redirect_scaling_obj();
+  })
+
+  let resize_button = document.querySelector('#resizebutton')
+  resize_button.addEventListener('click', async () => {
+    //console.log("resize clicked!")
+    btResize();
+  })
+
+  let relog_button = document.querySelector('#relog')
+  relog_button.addEventListener('click', async () => {
+    await relogValues();
+  })
+
+  let reset_button = document.querySelector('#reset')
+  reset_button.addEventListener('click', async () => {
+    await resetValues();
+  })
+
+  let email = document.querySelector('#email_click')
+  email.addEventListener('click', async () => {
+    email_copy_clipboard()
+  })
+
+  document.getElementById('input_x2').readOnly = true;
+  document.getElementById('input_y2').readOnly = true;
+
+  let unit_x = document.getElementById("default_unit").value;
+  let unit1 = document.getElementById("input_x_unit");
+  let unit2 = document.getElementById("input_y_unit");
+  unit1.value = unit_x;
+  unit2.value = unit_x;
+
+  miro.addListener('WIDGETS_DELETED', async widget => {
+    for(let i = 0; i < widget.data.length; i++) {
+      if(widget.data[i].id == current_scale_widget) {
+        miro.showNotification("Reference object has been removed please, set a new one to use scale");
+        current_scale_widget = 0;
+        let resizeButton = document.getElementById('resizebutton').disabled = true;
+        let ref_btn = document.getElementById("reference").disabled = true;
+        let unset_btn = document.getElementById("unset_scale").disabled = true;
+        document.getElementById('input_x2').readOnly = false;
+        document.getElementById('input_y2').readOnly = false;
+        status_off();
+        document.getElementById('input_x2').readOnly = false;
+        document.getElementById('input_y2').readOnly = false;
+      }
+    }
+  })
+
+  var scale_x = 0
+  var scale_y = 0
+  var objSize_x = ""
+  var objSize_y = ""
+
+  newWidgetCreatedListener()// adds event listener so we record data whenever a widget is added to the board
+
+  async function onSelectionChange() {
+      miro.board.selection.get().then(function(result) {
+        updateSelection(result)
+      });
+  }
+
+  async function updateSelection(selectedWidgets) {
+    console.log(selectedWidgets);
+    
+    selectedWidget = selectedWidgets[0]
+    if (selectedWidgets.length === 1) {
+      
+      showElement(widgetInfo)
+      hideElement(placeholder)
+      lastSelectedWidgetId = selectedWidget.id
+      lastSelectedWidget = selectedWidget
+      objSize_x = selectedWidget.bounds.width
+      objSize_y = selectedWidget.bounds.height
+
+      await getScale()
+      console.log("current scale widget: ", current_scale_widget);
+      if(current_scale_widget == undefined || current_scale_widget == 0) {
+        // meaning the widget got deleted manually
+        let set_btn = document.getElementById("setscale").disabled = false;
+        let set_btny = document.getElementById("setscaley").disabled = false;
+        let resizeButton = document.getElementById('resizebutton').disabled = true;
+        let resetButton = document.getElementById('reset').disabled = true;
+        let relogButton = document.getElementById('relog').disabled = true;
+        document.getElementById('input_x2').readOnly = false;
+        document.getElementById('input_y2').readOnly = false;
+        //change status paragraph to green
+      }
+      else {
+        let set_btn = document.getElementById("setscale").disabled = true;
+        let set_btny = document.getElementById("setscaley").disabled = true;
+        let resizeButton = document.getElementById('resizebutton').disabled = false;
+        let resetButton = document.getElementById('reset').disabled = false;
+        let relogButton = document.getElementById('relog').disabled = false;
+        document.getElementById('input_x2').readOnly = true;
+        document.getElementById('input_y2').readOnly = true;
+      }
+
+      if(selectedWidgets[0].id == current_scale_widget) {
+        //enable unset
+        let unset_btn = document.getElementById("unset_scale").disabled = false;
+        let resizeButton = document.getElementById('resizebutton').disabled = true;
+      }
+      else {
+        let unset_btn = document.getElementById("unset_scale").disabled = true;
+
+        if(current_scale_widget != undefined && current_scale_widget != 0) {
+          let resizeButton = document.getElementById('resizebutton').disabled = false;
+        }
+      }
+
+    } else {
+      lastSelectedWidgetId = 0;
+      if(current_scale_widget == 0 || current_scale_widget == undefined) {
+        let ref_btn = document.getElementById("reference").disabled = true;
+        let resizeButton = document.getElementById('resizebutton').disabled = true;
+      }
+      else {
+        let ref_btn = document.getElementById("reference").disabled = false;
+        let resizeButton = document.getElementById('resizebutton').disabled = false;
+      }
+      
+      showElement(placeholder)
+      hideElement(widgetInfo)
+    }
+  }
+
+// ----------------------------------
+  async function setScale(widgetId, scale) { // set X code 
+    // Get current scale
+    miro.board.widgets.get({
+      "metadata": {
+        "3074457354030127345": {
+          "scale_on": 1
+        }
+      }
+    }).then( function(result) {
+      //console.log("this should be new widget: ", widgetId);
+      setScale_WriteNew(widgetId, scale);
+      status_on();
+      document.getElementById('input_x2').readOnly = true;
+      document.getElementById('input_y2').readOnly = true;
+    })
+  }
+
+  async function setScale_WriteNew(widgetIdNew, scale) {
+    miro.board.widgets.update({
+      "id": widgetIdNew,
+      "metadata": {
+        "3074457354030127345": {
+          "scale": scale,
+          "scale_on": 1
+        }
+      },
+      "style" : {
+        "backgroundColor" : "#f24726"
+      },
+      "text" : "<p>Refererence Object</p>"
+    })
+  }
+
+
+// ----------------------------------
+
+
+
+
+  async function getScale() {
+      await miro.board.widgets.get({
+        "metadata": {
+          "3074457354030127345": {
+            "scale_on": 1
+          }
+        }
+      }).then( function(result) {
+        //console.log(result[0])
+        if(result[0] == undefined) {
+          input_x.value = "";
+          input_y.value = "";
+          input_x2.value = "";
+          input_y2.value = "";
+          let ref_btn = document.getElementById("reference").disabled = true;
+          status_off();
+          document.getElementById('input_x2').readOnly = false;
+          document.getElementById('input_y2').readOnly = false;
+        }
+        else {
+          status_on();
+          document.getElementById('input_x2').readOnly = true;
+          document.getElementById('input_y2').readOnly = true;
+          current_scale_widget = result[0].id;
+          scale_x = result[0].metadata["3074457354030127345"].scale
+          input_x2.value = roundCustom( objSize_x / scale_x )
+          input_y2.value = roundCustom( objSize_y / scale_x )
+
+          if(current_scale_widget == lastSelectedWidgetId) {
+            input_x.value = roundCustom( objSize_x / scale_x )
+            input_y.value = roundCustom( objSize_y / scale_x )
+            let ref_btn = document.getElementById("reference").disabled = true;
+            let resizeButton = document.getElementById('resizebutton').disabled = true;
+          }
+        
+          else {
+            let ref_btn = document.getElementById("reference").disabled = false;
+            let resizeButton = document.getElementById('resizebutton').disabled = false;
+          }
+        }
+      })
+  }
+
+// ----------------------------------
+
+
+
+  function showElement(el) {
+    el.style.display = 'block'
+  }
+
+  function hideElement(el) {
+    el.style.display = 'none'
+  }
+
+  hideElement(placeholder)
+  hideElement(widgetInfo)
+
+  
+  
+  miro.addListener(miro.enums.event.SELECTION_UPDATED, onSelectionChange)
+  miro.addListener(miro.enums.event.WIDGETS_TRANSFORMATION_UPDATED, onSelectionChange)
+  miro.board.selection.get().then(function(selectedWidgets) {
+    updateSelection(selectedWidgets)
+  })
+
+  async function btSetScaleY() { // set x caller
+    
+    if (lastSelectedWidgetId) {
+      current_scale_widget = lastSelectedWidgetId;
+      var scale_result = objSize_y / input_y.value
+      if(input_y.value === 0 || input_y.value === undefined || input_y.value === "0" || input_y.value === "" || input_y.value < 0) {
+        miro.showNotification("the Y value needs to be set by the user and cannot be blank, 0 or negative, use 100 for example");
+        return;
+      }
+      await setScale_WriteNew(lastSelectedWidgetId, scale_result) //jump here
+      input_x.value = objSize_x / scale_result
+      input_x2.value = input_x.value;
+      input_y2.value = input_y.value;
+      
+      let set_btn = document.getElementById("setscale").disabled = true;
+      let set_btny = document.getElementById("setscaley").disabled = true;
+      let unset_btn = document.getElementById("unset_scale").disabled = false;
+      let resetButton = document.getElementById('reset').disabled = false;
+      let relogButton = document.getElementById('relog').disabled = false;
+      document.getElementById('input_x2').readOnly = true;
+      document.getElementById('input_y2').readOnly = true;
+      
+      status_on();
+      miro.showNotification("Scale has been set! \nPlease lock this widget.");
+    }
+  }
+
+  async function btSetScale() { // set x caller
+    if (lastSelectedWidgetId) {
+      current_scale_widget = lastSelectedWidgetId;
+      var scale_result = objSize_x / input_x.value
+      if(input_x.value === 0 || input_x.value === undefined || input_x.value === "0" || input_x.value === "" || input_x.value < 0) {
+        miro.showNotification("the X value needs to be set by the user and cannot be blank, 0 or negative, use 100 for example");
+        return;
+      }
+      await setScale_WriteNew(lastSelectedWidgetId, scale_result) //jump here
+      input_y.value = objSize_y / scale_result
+      input_x2.value = input_x.value;
+      input_y2.value = input_y.value;
+      let set_btn = document.getElementById("setscale").disabled = true;
+      let set_btny = document.getElementById("setscaley").disabled = true;
+      let unset_btn = document.getElementById("unset_scale").disabled = false;
+      let resetButton = document.getElementById('reset').disabled = false;
+      let relogButton = document.getElementById('relog').disabled = false;
+      document.getElementById('input_x2').readOnly = true;
+      document.getElementById('input_y2').readOnly = true;
+      status_on();
+      miro.showNotification("Scale has been set! \nPlease lock this widget.");
+    }
+  }
+
+
+  async function init_values() {
+    //on extension init, get the ref. obj. values and fill them into their corresponding fields
+    await miro.board.widgets.get({
+        "id" : current_scale_widget
+      }).then( function(result) {
+        if(result[0] == undefined){
+          return;
+        }
+        else {
+          let objSize_x2 = result[0].bounds.width
+          let objSize_y2 = result[0].bounds.height
+
+          current_scale_widget = result[0].id;
+          scale_x = result[0].metadata["3074457354030127345"].scale
+          input_x.value = roundCustom( objSize_x2 / scale_x )
+          input_y.value = roundCustom( objSize_y2 / scale_x )
+        }
+      })
+     
+  }
+
+  //resize button redo:
+
+  async function btResize() { // resize
+    if (lastSelectedWidgetId) {
+      let old_w = lastSelectedWidget.bounds.width
+      let old_h = lastSelectedWidget.bounds.height
+      let w_ratio = lastSelectedWidget.bounds.width / lastSelectedWidget.bounds.height // used when height changes and new W needs to be calculated
+      let h_ratio = lastSelectedWidget.bounds.height / lastSelectedWidget.bounds.width // used when width changes and new H needs to be calculated
+      let text = lastSelectedWidget.text;
+
+      let new_W = input_x2.value * scale_x //input_x and input_y is user input value from UI
+      let new_H = input_y2.value * scale_x //scale_x is scaling proportion which is also set by user but not manually
+      
+      if(parseFloat(input_x2.value) == 0 || parseFloat(input_x2.value) < 0 || isNaN(input_x2.value) == true ||
+      parseFloat(input_y2.value) == 0 || parseFloat(input_y2.value) < 0 || isNaN(input_y2.value) == true) {
+        miro.showNotification("Value in resize field/s is invalid, please correct it!")
+        return;
+      }
+
+      if(document.getElementById('aspect_ratio').checked) {
+        console.log("aspect ratio checked while resizing")
+        if(old_w != new_W) {
+          console.log("old w: ", old_w, "new W: " ,new_W, " change in width detected");
+          let ratio_h = h_ratio * new_W;
+          await miro.board.widgets.update({
+            "id": lastSelectedWidgetId,
+            "width": new_W,
+            "height": ratio_h,
+            "text" : text
+          })
+          await relogValues();
+        }
+        else if(old_h != new_H) {
+          console.log("old h: ", old_h, "new H: " ,new_H, " change in height detected");
+          let ratio_w = w_ratio * new_H;
+          await miro.board.widgets.update({
+            "id": lastSelectedWidgetId,
+            "width": ratio_w,
+            "height": new_H,
+            "text" : text
+          })
+          await relogValues();
+        }
+      }
+      else {
+        console.log("normal resize...")
+        await miro.board.widgets.update({
+          "id": lastSelectedWidgetId,
+          "width": new_W,
+          "height": new_H,
+          "text" : text
+        })
+        await relogValues();
+      }
+    }
+  }
+
+  function roundCustom(n) {
+    n_abs = Math.abs(n)
+        if (n_abs > 1000 )  { return Math.round( n * 10 )      / 10; }
+    else if (n_abs > 100 )   { return Math.round( n * 100 )     / 100; }
+    else if (n_abs > 10 )    { return Math.round( n * 1000 )    / 1000; }
+    else if (n_abs > 0 )     { return Math.round( n * 10000 )   / 10000; }
+  }
+
+  //-------------------------- new functionality ---------------------------------------//
+
+  async function redirect_scaling_obj() {
+    //redirects user to the current widget set as scale to either manipulate it's value or to unset it
+    await miro.board.viewport.zoomToObject(current_scale_widget);
+    //select the widget too
+    await miro.board.selection.selectWidgets(current_scale_widget);
+  }
+
+  async function unset() {
+    // unsets the currently selected scale
+    //console.log("unsetting widget: ", current_scale_widget);
+    miro.board.widgets.update({
+      "id": current_scale_widget,
+      "metadata": {
+        "3074457354030127345": {
+          "scale": "",
+          "scale_on": ""
+        }
+      },
+      "style" : {
+        "backgroundColor" : "transparent"
+      },
+      "text" : ""
+    })
+    let set_btn = document.getElementById("setscale").disabled = false;
+    let set_btny = document.getElementById("setscaley").disabled = false;
+    let unset_btn = document.getElementById("unset_scale").disabled = true;
+    let ref_btn = document.getElementById("reference").disabled = true;
+    current_scale_widget = 0;
+    input_x2.value = "";
+    input_y2.value = "";
+    input_x.value = "";
+    input_y.value = "";
+    status_off();
+    document.getElementById('input_x2').readOnly = false;
+    document.getElementById('input_y2').readOnly = false;
+    miro.showNotification("Scale has been unset! Please set a new one...");
+  }
+
+  async function status_on() {
+    let status_update = document.getElementById("status_message");
+    status_update.innerHTML = "Good to go! Scale set.";
+    status_update.classList = "status-green";
+  }
+
+  async function status_off() {
+    let status_update = document.getElementById("status_message");
+    status_update.innerHTML = "Reference object and scale not set!";
+    status_update.classList = "status-red";
+  }
+
+  async function relogValues() {
+    await miro.board.selection.clear();
+    await miro.board.selection.selectWidgets(lastSelectedWidgetId);
+  }
+
+  function round(value, precision) {
+    let multiplier = Math.pow(10, precision || 0);
+    return Math.round(value * multiplier) / multiplier;
+  }
+
+  async function resetValues() {
+    document.getElementById("line_width_input").value = "";
+    document.getElementById("txt_size_input").value = "";
+  }
+
+
+  function email_copy_clipboard() {
+    let copyText = document.getElementById('email_click').innerText;
+    console.log("copyText: ", copyText);
+    let elem = document.createElement("textarea");
+    document.body.appendChild(elem);
+    elem.value = copyText;
+    elem.select();
+    elem.setSelectionRange(0, 99999)
+    document.execCommand("copy");
+    document.body.removeChild(elem);
+    miro.showNotification("Email copied to clipboard!");
+  }
+//-------------------------------------------------------------------- Dimensions code ------------------------------------------------------------------------//
+  let unsuppored_datatypes = [undefined, 0, "0", "", NaN];
+
+  async function CreateDimensionLine() { // creates quotation line from params available
+    currentDimensionGroup = []
+    currentDimensionGroupData = []
+    currentDimensionGroup.push(selectedWidget.id)
+    currentDimensionGroupData.push(selectedWidget)
+    let horizontalWidgetWidth = input_x2.value
+    let tresholdMargin
+    let textSize
+    let lineThicknessMargin
+    let lineTresholdMargin
+    let unitTextMarginX
+    let unitTextMarginY
+    dimensionCreatorState = true
+    let smart_width
+
+
+    let line_color = document.getElementById("line_color").value;
+    let line_type = document.getElementById("line_type").value;
+
+    let color;
+    let type;
+
+    if(line_color == "1") {
+      color = "#000000";
+    }
+    else if (line_color == "2") {
+      color = "#ffffff";
+    }
+    else if (line_color == "3") {
+      color = "#fef445";
+    }
+    else if (line_color == "4") {
+      color = "#fac710";
+    }
+    else if (line_color == "5") {
+      color = "#f24726";
+    }
+    else if (line_color == "6") {
+      color = "#e6e6e6";
+    }
+    else if (line_color == "7") {
+      color = "#cee741";
+    }
+    else if (line_color == "8") {
+      color = "#8fd14f";
+    }
+    else if (line_color == "9") {
+      color = "#da0063";
+    }
+    else if (line_color == "10") {
+      color = "#12cdd4";
+    }
+    else if (line_color == "11") {
+      color = "#0ca789";
+    }
+    else if (line_color == "12") {
+      color = "#9510ac";
+    }
+    else if (line_color == "13") {
+      color = "#2d9bf0";
+    }
+    else if (line_color == "14") {
+      color = "#414bb2";
+    }
+    else if (line_color == "15") {
+      color = "#652cb3";
+    }
+
+    if(line_type == "1") {
+      type = 2;
+    }
+    else if(line_type == "2") {
+      type = 1;
+    }
+    else if(line_type == "3") {
+      type = 4;
+    }
+
+
+    async function smart_value_identifier() {
+      // sets scale of the text and dimension line according to the smaller side of the widget
+      
+      let smart_scale_unit_text = 0.02522767042;
+      let smart_scale_unit_line = 0.04347826086;
+
+      let smart_value_x = lastSelectedWidget.bounds.width;
+      let smart_value_y = lastSelectedWidget.bounds.height;
+
+      if(smart_value_x < smart_value_y) {
+        // calculate the scale
+        textSize = smart_value_x * smart_scale_unit_text;
+        textSize = textSize / 6
+        lineThicknessMargin = (smart_value_x * smart_scale_unit_line) / 8
+        smart_width = smart_value_x / 2
+        lineTresholdMargin = 50 + lineThicknessMargin; // line extra space between line and object
+        tresholdMargin = 50; // text extra space between text and line
+        if(smart_value_x > 2000) {
+          lineTresholdMargin = lineTresholdMargin * 3;
+          tresholdMargin = tresholdMargin * 5;
+        }
+      }
+      else {
+        textSize = smart_value_y * smart_scale_unit_text;
+        textSize = textSize / 6
+        lineThicknessMargin = (smart_value_y * smart_scale_unit_line) / 8
+        smart_width = smart_value_y / 2
+        lineTresholdMargin = 50 + lineThicknessMargin;
+        tresholdMargin = 50;
+        if(smart_value_y > 2000) {
+          lineTresholdMargin = lineTresholdMargin * 3;
+          tresholdMargin = tresholdMargin * 5;
+        }
+      }
+
+    }
+    
+    await smart_value_identifier(); 
+    let txt_min = 0.7;
+    let txt_max = 800;
+    let line_min = 1;
+    let line_max = 55;
+
+
+    if(document.getElementById("txt_size_input").value.includes(unsuppored_datatypes) === false  && document.getElementById("txt_size_input").value.length != 0 &&
+    parseFloat(document.getElementById("txt_size_input").value) >= txt_min && parseFloat(document.getElementById("txt_size_input").value) <= txt_max) {
+      textSize = parseFloat(document.getElementById("txt_size_input").value);
+    }
+    else{
+      miro.showNotification("Value for text size outside of range or incorrect, using smart values");
+      document.getElementById("txt_size_input").value = round(textSize, 1);
+    }
+
+    if(document.getElementById("line_width_input").value.includes(unsuppored_datatypes) === false && document.getElementById("line_width_input").value.length != 0 &&
+    parseFloat(document.getElementById("line_width_input").value) >= line_min && parseFloat(document.getElementById("line_width_input").value) <= line_max) {
+      lineThicknessMargin = parseFloat(document.getElementById("line_width_input").value);
+    }
+    else{
+      miro.showNotification("Value for line thickness outside of range or incorrect, using smart values");
+      document.getElementById("line_width_input").value = round(lineThicknessMargin, 1);
+    }
+
+
+
+    let horizontalStartPosX = lastSelectedWidget.bounds.left
+    let horizontalStartPosY = lastSelectedWidget.bounds.bottom + lineTresholdMargin
+    let horizontalEndPosX = lastSelectedWidget.bounds.right
+    let horizontalEndPosY = lastSelectedWidget.bounds.bottom + lineTresholdMargin
+    
+    let coef_wb_to_w = 42.68737352 // coeficient when converting from text widget bounds width to text widgett width
+    let b_wh = lastSelectedWidget.bounds.width / 2.9;
+    let wh = b_wh / coef_wb_to_w;
+
+    await miro.board.widgets.create({ // Line structure for horizontal
+      "capabilities" : {
+          "editable" : true
+      },
+      "clientVisible" : true,
+      "startPosition" : {
+          "x" : horizontalStartPosX,
+          "y" : horizontalStartPosY
+      },
+      "endPosition" : {
+          "x" : horizontalEndPosX,
+          "y" : horizontalEndPosY
+      },
+      "style": {
+        "lineColor" : color,
+        "lineEndStyle" : 8,
+        "lineStartStyle" : 8,
+        "lineStyle" : type,
+        "lineThickness" : lineThicknessMargin,
+        "lineType" : 1
+      },
+      "type": "LINE"
+    })
+
+    let horizontalText = horizontalWidgetWidth + "&nbsp" + input_x_unit.value
+    
+
+    await miro.board.widgets.create({ // Text structure for horizontal AKA spodny text
+      "capabilities" : {
+          "editable" : true
+      },
+      "scale" : textSize,
+      "style" : {
+        "backgroundColor" : "transparent",
+        "backgroundOpacity" : 1,
+        "bold" : 0,
+        "borderColor" : "transparent",
+        "borderOpacity" : 1,
+        "borderStyle" : 2,
+        "borderWidth" : 2,
+        "fontFamily" : 10,
+        "highlighting" : 0,
+        "italic" : 0,
+        "padding" : undefined,
+        "strike" : 0,
+        "textAlign" : "c",
+        "textColor" : "#1a1a1a",
+        "underline" : 0
+      },
+      "text" : horizontalText,
+      "type": "TEXT",
+      "width" : 120,
+      "x" : lastSelectedWidget.bounds.x,
+      "y" : horizontalStartPosY + tresholdMargin + lineThicknessMargin * 3
+    })
+
+    //count characters in horizontalWidgetWidth to determine width. 3 digits = min width 78, 4 digits = 86, 5 digits = 95 (each extra digit +10~ pixels) 
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    let verticalWidgetHeight = input_y2.value
+
+    let verticalStartPosX = lastSelectedWidget.bounds.right + lineTresholdMargin
+    let verticalStartPosY = lastSelectedWidget.bounds.bottom
+    let verticalEndPosX = lastSelectedWidget.bounds.right + lineTresholdMargin
+    let verticalEndPosY = lastSelectedWidget.bounds.top
+
+    await miro.board.widgets.create({ // Line structure for vertical
+      "capabilities" : {
+          "editable" : true
+      },
+      "clientVisible" : true,
+      "startPosition" : {
+          "x" : verticalStartPosX,
+          "y" : verticalStartPosY
+      },
+      "endPosition" : {
+          "x" : verticalEndPosX,
+          "y" : verticalEndPosY
+      },
+      "style": {
+        "lineColor" : color,
+        "lineEndStyle" : 8,
+        "lineStartStyle" : 8,
+        "lineStyle" : type,
+        "lineThickness" : lineThicknessMargin,
+        "lineType" : 1
+      },
+      "type": "LINE"
+    })
+
+    let verticalText = verticalWidgetHeight + "&nbsp" + input_y_unit.value
+
+    await miro.board.widgets.create({ // Text structure for vertical AKA text napravo
+      "capabilities" : {
+          "editable" : true
+      },
+      "scale" : textSize,
+      "rotation" : 270,
+      "style" : {
+        "backgroundColor" : "transparent",
+        "backgroundOpacity" : 1,
+        "bold" : 0,
+        "borderColor" : "transparent",
+        "borderOpacity" : 1,
+        "borderStyle" : 2,
+        "borderWidth" : 2,
+        "fontFamily" : 10,
+        "highlighting" : 0,
+        "italic" : 0,
+        "padding" : undefined,
+        "strike" : 0,
+        "textAlign" : "c",
+        "textColor" : "#1a1a1a",
+        "underline" : 0
+      },
+      "text" : verticalText,
+      "type": "TEXT",
+      "width" : 120,
+      "x" : verticalStartPosX + tresholdMargin + lineThicknessMargin * 3,
+      "y" : lastSelectedWidget.bounds.y
+    })
+  }
+
+  //keystrokes for grouping: 
+  //Jquery still making trouble check if jquery works as it should from the link
+  function keyStrokeGroup() {
+    e = jQuery.Event("keydown");
+    fake = $.extend({}, e, {ctrlKey: true, which: 71});
+    $("input").trigger(fake);
+  }
+  
+  async function newWidgetCreatedListener() { // async handler actually works this way *surprisingly*
+      miro.addListener('WIDGETS_CREATED', async widget => {
+
+        currentDimensionGroup.push(widget.data[0].id)
+        currentDimensionGroupData.push(widget.data[0])
+        
+        if(dimensionCreatorState == true && currentDimensionGroup.length == 5) {
+          await miro.board.selection.selectWidgets(currentDimensionGroup)
+          dimensionCreatorState = false
+          currentDimensionGroup = []
+        }
+      })
+  }
+
+})
+
+
+</script>
+</body>
+</html>
