@@ -13,7 +13,7 @@ function getPath() {
   const team_id = urlParams.get('team_id');
   console.log("team_id: ", team_id);
 
-  const client_secret = "zWgZ3wFxu9Oa5dloPc1r9PUEKjsJX5h1";
+  const client_secret = "CLIENT_SECRET_HERE";
   console.log("client_secret: ", client_secret);
 
 
